@@ -18,11 +18,19 @@ const app = Vue.createApp({
    },
 
    computed: {
+  
      monsterBarStyles() {
+      if (this.monsterHealth < 0) {
+        return { width: '0%'};
+      }
+
       return {width: this.monsterHealth + '%'}
      },
 
      playerBarStyles() {
+      if (this.playerHealth < 0) {
+        return { width: '0%'};
+      }
       return {width: this.playerHealth + '%'}
      },
      
@@ -54,14 +62,21 @@ const app = Vue.createApp({
    },
 
   methods: {
+    startGame(){
+      this.playerHealth = 100,
+      this.monsterHealth = 100,
+      this.currentRound = 0,
+      this.popePhoto = 'Cenzo1.jpg',
+      this.counter = 0,
+      this.winner = null
+    },
+
     attackMonster() {      
       this.currentRound++;
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
       this.attackPlayer();
       this.popeChangePhoto();
-
-     
     },
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
@@ -107,11 +122,13 @@ const app = Vue.createApp({
         this.popePhoto = 'Cenzo4.jpg'
       }
 
-      else if (this.counter === 10)
-      {
-        this.popePhoto = 'Cenzo5.jpg'
+      else if (this.monsterHealth < 10) {
+        this.popePhoto = 'Cenzo5.jpg';
       }
 
+    },
+    surrender() {
+      this.winner = 'monster';
     }
 
   }
