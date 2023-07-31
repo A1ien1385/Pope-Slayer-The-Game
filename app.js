@@ -13,7 +13,8 @@ const app = Vue.createApp({
       popePhoto: 'Cenzo1.jpg',
       shionPhoto: 'shion1.jpg',
       counter: 0,
-      winner: null
+      winner: null,
+      logMessages: []
      
     };
    },
@@ -68,13 +69,15 @@ const app = Vue.createApp({
       this.monsterHealth = 100,
       this.currentRound = 0,
       this.popePhoto = 'Cenzo1.jpg',
-      this.winner = null
+      this.winner = null,
+      this.logMessages = []
     },
 
     attackMonster() {      
       this.currentRound++;
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
+      this.addLogMessages('player', 'attack', attackValue);
       this.attackPlayer();
       this.popeChangePhoto();
       this.shionChangePhoto();
@@ -82,11 +85,13 @@ const app = Vue.createApp({
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
       this.playerHealth -= attackValue;
+      this.addLogMessages('monster', 'attack', attackValue);
     },
     specialAttackMonster() {
       this.currentRound++;
       const attackValue = getRandomValue(10, 25);
       this.monsterHealth -= attackValue;
+      this.addLogMessages('player', 'attack', attackValue);
       this.attackPlayer();
       this.popeChangePhoto();
       this.shionChangePhoto()
@@ -100,6 +105,7 @@ const app = Vue.createApp({
       else {
         this.playerHealth += healValue;
       }
+      this.addLogMessages('player', 'heal', healValue);
       this.attackPlayer();
     },
     popeChangePhoto() {
@@ -144,9 +150,15 @@ const app = Vue.createApp({
 
     },
 
-
     surrender() {
       this.winner = 'monster';
+    },
+    addLogMessages(who, what, value) {
+       this.logMessages.unshift({
+        actionBy: who,
+        actionType: what,
+        actionValue: value
+       });
     }
 
   }
