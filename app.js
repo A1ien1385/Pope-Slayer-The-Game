@@ -102,27 +102,27 @@ const app = Vue.createApp({
     },
     popeChangePhoto() {
       this.counter++;
-      if (this.counter === 2)
+      if (this.monsterHealth >= 91 && this.monsterHealth <= 100)
+      {
+        this.popePhoto = 'Cenzo1.jpg'
+      }
+
+      else if (this.monsterHealth >= 61 && this.monsterHealth <= 90)
       {
         this.popePhoto = 'Cenzo2.jpg'
       }
 
-      else if (this.counter === 4)
+      else if (this.monsterHealth >= 30 && this.monsterHealth <= 60)
       {
         this.popePhoto = 'Cenzo3.jpg'
       }
 
-      else if (this.counter === 6)
+      else if (this.monsterHealth >= 6 && this.monsterHealth <= 29)
       {
         this.popePhoto = 'Cenzo4.jpg'
       }
 
-      else if (this.counter === 8)
-      {
-        this.popePhoto = 'Cenzo4.jpg'
-      }
-
-      else if (this.monsterHealth < 10) {
+      else if (this.monsterHealth < 5) {
         this.popePhoto = 'Cenzo5.jpg';
       }
 
