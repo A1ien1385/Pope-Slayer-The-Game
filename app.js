@@ -11,6 +11,7 @@ const app = Vue.createApp({
       monsterHealth: 100,
       currentRound: 0,
       popePhoto: 'Cenzo1.jpg',
+      shionPhoto: 'shion1.jpg',
       counter: 0,
       winner: null
      
@@ -76,6 +77,7 @@ const app = Vue.createApp({
       this.monsterHealth -= attackValue;
       this.attackPlayer();
       this.popeChangePhoto();
+      this.shionChangePhoto();
     },
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
@@ -87,6 +89,7 @@ const app = Vue.createApp({
       this.monsterHealth -= attackValue;
       this.attackPlayer();
       this.popeChangePhoto();
+      this.shionChangePhoto()
     },
     healPlayer() {
       this.currentRound++;
@@ -126,6 +129,22 @@ const app = Vue.createApp({
       }
 
     },
+
+
+    shionChangePhoto(){
+
+      if (this.playerHealth >= 1 && this.playerHealth <= 100)
+      {
+        this.shionPhoto = 'shion1.jpg'
+      }
+
+      else if (this.playerHealth <= 0) {
+        this.shionPhoto = 'shion2.png';
+      }
+
+    },
+
+
     surrender() {
       this.winner = 'monster';
     }
