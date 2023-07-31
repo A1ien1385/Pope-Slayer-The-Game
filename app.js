@@ -67,7 +67,6 @@ const app = Vue.createApp({
       this.monsterHealth = 100,
       this.currentRound = 0,
       this.popePhoto = 'Cenzo1.jpg',
-      this.counter = 0,
       this.winner = null
     },
 
@@ -101,7 +100,7 @@ const app = Vue.createApp({
       this.attackPlayer();
     },
     popeChangePhoto() {
-      this.counter++;
+      
       if (this.monsterHealth >= 91 && this.monsterHealth <= 100)
       {
         this.popePhoto = 'Cenzo1.jpg'
@@ -122,7 +121,7 @@ const app = Vue.createApp({
         this.popePhoto = 'Cenzo4.jpg'
       }
 
-      else if (this.monsterHealth < 5) {
+      else if (this.monsterHealth <= 0) {
         this.popePhoto = 'Cenzo5.jpg';
       }
 
